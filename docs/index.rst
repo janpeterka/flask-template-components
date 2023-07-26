@@ -15,6 +15,7 @@ Welcome to Flask-Template-Components's documentation!
 Indices and tables
 ==================
 
+* :ref:`api`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
