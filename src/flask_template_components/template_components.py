@@ -12,6 +12,7 @@ class TemplateComponents:
 
     Usage:
     .. code-block:: python
+
         # __init__.py
         from flask import Flask
         from flask_template_component import TemplateComponents
