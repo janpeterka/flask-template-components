@@ -10,10 +10,11 @@ class ComponentHelperMeta(type):
 
         @classmethod
         def register_helper_method(cls, application, name: str = None):
-            """creates `register_helper` method on class, which registers helper method on application
+            """registers helper method on application
 
             [description]
-            :param application: [description]
+
+            :param application: Flask appplication object
             :type application: Flask
             :param name: name of helper, called from jinja template, defaults to None
             :type name: str, optional
@@ -26,15 +27,18 @@ class ComponentHelperMeta(type):
         setattr(cls, "register_helper", register_helper_method)
 
 
-def register_helpers(
-    application,
-    package_name="flask_template_components.components",
-):
+def register_helpers(application):
+    """register all helpers in a package
+
+    [description]
+    :param application: Flask application object
+    :type application: Flask
+    """
     import importlib
     import inspect
 
     # Import the package dynamically
-    package = importlib.import_module(package_name)
+    package = importlib.import_module("flask_template_components.components")
 
     # Get all classes defined in the package
     classes = inspect.getmembers(package, inspect.isclass)
