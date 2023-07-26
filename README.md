@@ -1,3 +1,10 @@
+# WARNING: This project is heavily Work in Progress. It's not ready for production!
+For that reason it's not available from PiPy now (only TestPyPi).
+When it reaches some maturity, it will become version 1.0.0 and be provided via PiPy.
+
+# Are you interested in this project?
+Let me know!
+
 # What's Flask-TemplateComponents purpose?
 Are you too lazy to write the same HTML over and over again?
 Do you find Jinja powerful, but not very readable in complex cases?
