@@ -7,8 +7,8 @@ class TemplateComponents:
     """Flask extension object
 
     Adds the following template functions via context_processor:
-    * `render_class` for rendering css class string in templates
-    * `render_data` for rendering data attributes in templates
+        * `render_class` for rendering css class string in templates
+        * `render_data` for rendering data attributes in templates
 
     Usage:
 
