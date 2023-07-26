@@ -2,17 +2,23 @@ from typing import Union
 
 
 class CSSClasses:
+    """Allows simpler management of css classes for Components
+
+    Every component has `css_classes` attribute which is an instance of this class.
+    This simplifies adding css classes to components.
+    """
+
     def __init__(self, initial_classes: Union[str, list[str]] = None):
-        self.classes = ""
+        self.css_classes = ""
         self.append(initial_classes)
 
     def __str__(self):
-        return self.classes
+        return self.css_classes
 
     def append(self, new_classes: Union[str, list[str]]):
         """Add css classes to class list
 
-        [description]
+        Used for adding css classes to component dynamically, without having to manage correct spaces and all.
 
         Examples:
         - self.css_classes.append("btn")
@@ -30,7 +36,7 @@ class CSSClasses:
         else:
             raise TypeError("New classes must be a string.")
 
-        if self.classes:
-            self.classes += f" {new_classes}"
+        if self.css_classes:
+            self.css_classes += f" {new_classes}"
         else:
-            self.classes = new_classes
+            self.css_classes = new_classes
