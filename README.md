@@ -1,4 +1,4 @@
-README.md# What's Flask-TemplateComponents purpose?
+# What's Flask-TemplateComponents purpose?
 Are you too lazy to write the same HTML over and over again?
 Do you find Jinja powerful, but not very readable in complex cases?
 
