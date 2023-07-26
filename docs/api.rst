@@ -19,3 +19,11 @@ Components
 .. automodule:: flask_template_components.components
    :members:
 
+======
+Mixins
+======
+
+.. automodule:: flask_template_components.mixins
+   :members:
+
+
