@@ -24,3 +24,23 @@ class ComponentHelperMeta(type):
             application.add_template_global(cls.helper, name=name)
 
         setattr(cls, "register_helper", register_helper_method)
+
+
+def register_helpers(
+    application,
+    package_name="flask_template_components.components",
+):
+    import importlib
+    import inspect
+
+    # Import the package dynamically
+    package = importlib.import_module(package_name)
+
+    # Get all classes defined in the package
+    classes = inspect.getmembers(package, inspect.isclass)
+
+    for klassname, klass in classes:
+        klass.register_helper(application)
+        application.add_template_global(
+            klass.helper, name=camelcase_to_snakecase(klassname)
+        )

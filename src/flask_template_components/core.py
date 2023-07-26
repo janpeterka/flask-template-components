@@ -9,7 +9,7 @@ from .helpers import ComponentHelperMeta
 class BaseComponent(metaclass=ComponentHelperMeta):
     """Base class for all TemplateComponents.
 
-    provides `render` method, which renders template with attributes passed to it.
+    Mainly provides `render` method, which renders template with attributes passed to it.
 
     :param DEFAULT_CLASSES: list of css classes to be added to the component
     :type DEFAULT_CLASSES: list
@@ -29,12 +29,12 @@ class BaseComponent(metaclass=ComponentHelperMeta):
 
     def render(self, remove_newlines: bool = True) -> Markup:
         html = render_template(self._template, **self._attributes)
-        html = BaseComponent.clean_markup(html)
+        html = BaseComponent._clean_markup(html)
 
         return Markup(html)
 
     @staticmethod
-    def clean_markup(html: str, remove_newlines: bool = True) -> str:
+    def _clean_markup(html: str, remove_newlines: bool = True) -> str:
         if remove_newlines:
             html = html.replace("\n", "")
         while "  " in html:
@@ -96,23 +96,3 @@ class BaseComponent(metaclass=ComponentHelperMeta):
         filename = os.path.splitext(os.path.basename(filename))[0]
 
         return filename
-
-
-def register_helpers(
-    application,
-    package_name="flask_template_components.components",
-):
-    import importlib
-    import inspect
-
-    # Import the package dynamically
-    package = importlib.import_module(package_name)
-
-    # Get all classes defined in the package
-    classes = inspect.getmembers(package, inspect.isclass)
-
-    for klassname, klass in classes:
-        klass.register_helper(application)
-        application.add_template_global(
-            klass.helper, name=camelcase_to_snakecase(klassname)
-        )
