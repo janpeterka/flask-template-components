@@ -17,6 +17,11 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+dependencies = [
+  "flask>=2.3, <3",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/janpeterka/flask-template-components"
 "Bug Tracker" = "https://github.com/janpeterka/flask-template-components/issues"
+
