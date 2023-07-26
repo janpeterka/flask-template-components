@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "flask_template_components"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Jan Peterka", email="jan.peterka@hey.com" },
 ]

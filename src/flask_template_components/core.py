@@ -127,7 +127,7 @@ class BaseComponent(metaclass=ComponentHelperMeta):
 
 def register_helpers(
     application,
-    package_name="kucharka.packages.template_components.components",
+    package_name="flask_template_components.components",
 ):
     import importlib
     import inspect
