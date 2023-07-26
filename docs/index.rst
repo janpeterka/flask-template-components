@@ -10,12 +10,13 @@ Welcome to Flask-Template-Components's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   api
+
 
 
 Indices and tables
 ==================
 
-* :ref:`api`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
