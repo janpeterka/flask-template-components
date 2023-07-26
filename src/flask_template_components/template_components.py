@@ -11,18 +11,18 @@ class TemplateComponents:
     - `render_data` for rendering data attributes in templates
 
     Usage:
-    ```python
-    # __init__.py
-    from flask import Flask
-    from flask_template_component import TemplateComponents
+    .. code-block:: python
+        # __init__.py
+        from flask import Flask
+        from flask_template_component import TemplateComponents
 
-    components = TemplateComponents()
+        components = TemplateComponents()
 
 
-    def create_app():
-        application = Flask()
-        # (...)
-        components.init_app(application)
+        def create_app():
+            application = Flask()
+            # (...)
+            components.init_app(application)
     """
 
     def __init__(self, app=None):

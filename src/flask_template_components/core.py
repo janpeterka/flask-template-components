@@ -27,9 +27,46 @@ class BaseComponent(metaclass=ComponentHelperMeta):
         class_list = self.kwargs.pop("class", "").split(" ") + self.DEFAULT_CLASSES
         self.css_classes = CSSClasses(class_list)
 
+        @classmethod
+        def helper_method(cls, *args, **kwargs):
+            """helper method for rendering component
+
+            It's used in automatic helper registration, or can be called directly on component class.
+            Example:
+
+            >> MyComponent.helper()
+
+            """
+            return cls(*args, **kwargs).render()
+
+        setattr(cls, "helper", helper_method)
+
+        @classmethod
+        def register_helper_method(cls, application, name: str = None):
+            """registers helper method on application
+
+            :param application: Flask appplication object
+            :type application: Flask
+            :param name: name of helper, called from jinja template, defaults to None
+            :type name: str, optional
+            """
+            if name is None:
+                name = camelcase_to_snakecase(cls.__name__)
+
+            application.add_template_global(cls.helper, name=name)
+
+        setattr(cls, "register_helper", register_helper_method)
+
     def render(self, remove_newlines: bool = True) -> Markup:
+        """renders template with attributes passed to it
+
+        :param remove_newlines: passed to `_clean_markup`, defaults to True
+        :type remove_newlines: bool, optional
+        :returns: HTML code as Markup
+        :rtype: {Markup}
+        """
         html = render_template(self._template, **self._attributes)
-        html = BaseComponent._clean_markup(html)
+        html = BaseComponent._clean_markup(html, remove_newlines)
 
         return Markup(html)
 
@@ -39,6 +76,7 @@ class BaseComponent(metaclass=ComponentHelperMeta):
             html = html.replace("\n", "")
         while "  " in html:
             html = html.replace("  ", " ")
+
         html = html.replace(" >", ">")
         html = html.replace("> <", "><")
         html = html.replace('=" ', '="')

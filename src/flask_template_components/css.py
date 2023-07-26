@@ -6,6 +6,8 @@ class CSSClasses:
 
     Every component has `css_classes` attribute which is an instance of this class.
     This simplifies adding css classes to components.
+
+    FUTURE: It will be enabled to subclass this class to add custom functionality.
     """
 
     def __init__(self, initial_classes: Union[str, list[str]] = None):
@@ -21,9 +23,9 @@ class CSSClasses:
         Used for adding css classes to component dynamically, without having to manage correct spaces and all.
 
         Examples:
-        - self.css_classes.append("btn")
-        - self.css_classes.append("btn btn-primary")
-        - self.css_classes.append(["btn", "btn-primary"])
+        >> self.css_classes.append("btn")
+        >> self.css_classes.append("btn btn-primary")
+        >> self.css_classes.append(["btn", "btn-primary"])
 
         :param new_classes: css classes to add
         :type new_classes: Union[str, list[str]]
