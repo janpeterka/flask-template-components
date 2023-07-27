@@ -19,7 +19,7 @@ class ImageWithObject(Image):
         alt: str = None,
         image: object = None,
         thumbnail: bool = False,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
 
