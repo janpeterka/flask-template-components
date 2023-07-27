@@ -32,6 +32,7 @@ class TemplateComponents:
             self.init_app(app)
 
     def init_app(self, app):
+        self.app = app
         app.register_blueprint(bp)
 
         @app.context_processor
@@ -65,3 +66,57 @@ class TemplateComponents:
                 return Markup(" ".join([f"data-{k}='{v}'" for k, v in data.items()]))
 
             return dict(render_class=render_class, render_data=render_data)
+
+    # def register_helpers(self, module_name="..flask_template_components.components"):
+    #     """register all helpers in a package
+    #     WIP: this is possibly not working now!
+
+    #     [description]
+    #     :param application: Flask application object
+    #     :type application: Flask
+    #     """
+    #     import importlib
+    #     import inspect
+
+    #     # Import the package dynamically
+    #     package = importlib.import_module(module_name)
+
+    #     # Get all classes defined in the package
+    #     classes = inspect.getmembers(package, inspect.isclass)
+
+    #     for klassname, klass in classes:
+    #         klass.register_helper(application)
+    #         self.application.add_template_global(
+    #             klass.helper, name=camelcase_to_snakecase(klassname)
+    #         )
+
+    def register_helpers(self):
+        # Assuming your package name is flask_template_components and your components
+        # package is located inside the same directory as core.py.
+        from .components import Link, BaseIcon, Image, ImageWithObject
+
+        __all__ = [Link, BaseIcon, Image, ImageWithObject]
+
+        for component_class in __all__:
+            component_class.register_helper(self.app)
+
+        # This was my try on some smart way to do this automatically, but it fails in tests due to how relative paths behave or something.
+        # Maybe one day I'll be able to do it, until then I'm importing classes manually here
+
+        # package_name = "flask_template_components.components"
+        # import importlib
+
+        # # Get the list of module names from components/__init__.py
+        # from . import components
+
+        # module_names = components.__all__
+        # print(module_names)
+
+        # # Import each module and register the helpers
+        # for module_name in module_names:
+        #     module_path = f"{package_name}.{module_name}"
+        #     print(module_path)
+        #     module = importlib.import_module(module_path)
+
+        #     # Assuming there's a helper function called "register_helper" in each module
+        #     module.register_helper()

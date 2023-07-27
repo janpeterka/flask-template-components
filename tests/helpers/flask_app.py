@@ -30,6 +30,6 @@ def create_app():
         path = request.args.get("path")
         value = request.args.get("value")
 
-        return render_template_string("{{ link(path, value) }}")
+        return render_template_string("{{ link(path, value) }}", path=path, value=value)
 
     return app

@@ -3,10 +3,9 @@ from markupsafe import Markup
 import os
 from .utils import camelcase_to_snakecase
 from .css import CSSClasses
-from .helpers import ComponentHelperMeta
 
 
-class BaseComponent(metaclass=ComponentHelperMeta):
+class BaseComponent:
     """Base class for all TemplateComponents.
 
     Mainly provides `render` method, which renders template with attributes passed to it.
@@ -27,35 +26,31 @@ class BaseComponent(metaclass=ComponentHelperMeta):
         class_list = self.kwargs.pop("class", "").split(" ") + self.DEFAULT_CLASSES
         self.css_classes = CSSClasses(class_list)
 
-        @classmethod
-        def helper_method(cls, *args, **kwargs):
-            """helper method for rendering component
+    @classmethod
+    def helper(cls, *args, **kwargs):
+        """helper method for rendering component
 
-            It's used in automatic helper registration, or can be called directly on component class.
-            Example:
+        It's used in automatic helper registration, or can be called directly on component class.
+        Example:
 
-            >> MyComponent.helper()
+        >> MyComponent.helper()
 
-            """
-            return cls(*args, **kwargs).render()
+        """
+        return cls(*args, **kwargs).render()
 
-        setattr(cls, "helper", helper_method)
+    @classmethod
+    def register_helper(cls, application, name: str = None):
+        """registers helper method on application
 
-        @classmethod
-        def register_helper_method(cls, application, name: str = None):
-            """registers helper method on application
+        :param application: Flask appplication object
+        :type application: Flask
+        :param name: name of helper, called from jinja template, defaults to None
+        :type name: str, optional
+        """
+        if name is None:
+            name = camelcase_to_snakecase(cls.__name__)
 
-            :param application: Flask appplication object
-            :type application: Flask
-            :param name: name of helper, called from jinja template, defaults to None
-            :type name: str, optional
-            """
-            if name is None:
-                name = camelcase_to_snakecase(cls.__name__)
-
-            application.add_template_global(cls.helper, name=name)
-
-        setattr(cls, "register_helper", register_helper_method)
+        application.add_template_global(cls.helper, name=name)
 
     def render(self, remove_newlines: bool = True) -> Markup:
         """renders template with attributes passed to it
