@@ -63,7 +63,7 @@ class TemplateComponents:
                 if not data:
                     return ""
 
-                return Markup(" ".join([f"data-{k}='{v}'" for k, v in data.items()]))
+                return Markup(" ".join([f'data-{k}="{v}"' for k, v in data.items()]))
 
             return dict(render_class=render_class, render_data=render_data)
 

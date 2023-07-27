@@ -23,8 +23,10 @@ class BaseComponent:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
 
-        class_list = self.kwargs.pop("class", "").split(" ") + self.DEFAULT_CLASSES
-        self.css_classes = CSSClasses(class_list)
+        self.css_classes = CSSClasses()
+        self.css_classes.append(self.kwargs.pop("class", ""))
+        self.css_classes.append(self.kwargs.pop("classes", ""))
+        self.css_classes.append(self.DEFAULT_CLASSES)
 
     @classmethod
     def helper(cls, *args, **kwargs):

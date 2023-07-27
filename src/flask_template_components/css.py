@@ -35,8 +35,12 @@ class CSSClasses:
             new_classes = " ".join(new_classes)
         elif isinstance(new_classes, str):
             new_classes = new_classes.strip()
+        elif new_classes is None:
+            return
         else:
-            raise TypeError("New classes must be a string.")
+            raise TypeError(
+                f"New classes must be a string or list, not {type(new_classes)} ({new_classes})."
+            )
 
         if self.css_classes:
             self.css_classes += f" {new_classes}"
