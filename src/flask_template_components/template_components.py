@@ -14,7 +14,7 @@ class TemplateComponents:
 
     .. code-block:: python
 
-        # __init__.py
+        # app/__init__.py
         from flask import Flask
         from flask_template_component import TemplateComponents
 
@@ -46,7 +46,7 @@ class TemplateComponents:
                 :returns: markup string to use inside HTML
                 :rtype: {Markup}
                 """
-                if not classes:
+                if not classes or len(str(classes)) == 0:
                     return ""
 
                 return Markup(f'class="{classes}"')
