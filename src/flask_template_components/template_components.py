@@ -67,29 +67,6 @@ class TemplateComponents:
 
             return dict(render_class=render_class, render_data=render_data)
 
-    # def register_helpers(self, module_name="..flask_template_components.components"):
-    #     """register all helpers in a package
-    #     WIP: this is possibly not working now!
-
-    #     [description]
-    #     :param application: Flask application object
-    #     :type application: Flask
-    #     """
-    #     import importlib
-    #     import inspect
-
-    #     # Import the package dynamically
-    #     package = importlib.import_module(module_name)
-
-    #     # Get all classes defined in the package
-    #     classes = inspect.getmembers(package, inspect.isclass)
-
-    #     for klassname, klass in classes:
-    #         klass.register_helper(application)
-    #         self.application.add_template_global(
-    #             klass.helper, name=camelcase_to_snakecase(klassname)
-    #         )
-
     def register_helpers(self):
         # Assuming your package name is flask_template_components and your components
         # package is located inside the same directory as core.py.
